@@ -14,6 +14,10 @@ public class Animal {
     }
 
     public String getName(){
-        return name;
+        return this.name;
+    }
+
+    public int getId(){
+        return this.id;
     }
 }
