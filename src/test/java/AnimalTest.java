@@ -16,4 +16,11 @@ public class AnimalTest {
         lucky.getName();
         assertEquals("Lucky", lucky.getName());
     }
+
+    @Test
+    public void getId_animalInstantiatesWithId_int() {
+        Animal lucky = new Animal("Lucky", 1);
+        lucky.getId();
+        assertEquals(1, lucky.getId());
+    }
 }
