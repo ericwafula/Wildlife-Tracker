@@ -8,6 +8,7 @@ import java.util.Timer;
 public class Endangered {
     private String name;
     private int animalId;
+    private int id;
     private String age;
 
     private String healthy;
@@ -58,4 +59,31 @@ public class Endangered {
     public int hashCode() {
         return Objects.hash(getName(), getAnimalId());
     }
+
+    public int getId(){
+        return id;
+    }
+
+    public void save(){
+        try(Connection con = DB.sql2o.open()){
+            String sql = "INSERT INTO animals (name, animalId) VALUES (:name, :animalId)";
+            this.id = (int) con.createQuery(sql, true)
+                    .addParameter("name", this.name)
+                    .addParameter("animalId", this.animalId)
+                    .executeUpdate()
+                    .getKey();
+        }
+    }
+
+    public static List<Endangered> all(){
+        try(Connection con = DB.sql2o.open()){
+            String sql = "SELECT * FROM animals";
+            return con.createQuery(sql)
+                    .executeAndFetch(Endangered.class);
+        }
+    }
+
+
+
+
 }

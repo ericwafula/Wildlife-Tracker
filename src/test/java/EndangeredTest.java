@@ -31,4 +31,11 @@ public class EndangeredTest {
         Endangered lucky = new Endangered("Becky", 1);
         assertTrue(becky.equals(lucky));
     }
+
+    @Test
+    public void save_returnsTrueIfDescriptionsAreTheSame(){
+        Endangered becky = new Endangered("Becky", 1);
+        becky.save();
+        assertTrue(Endangered.all().get(0).equals(becky));
+    }
 }
