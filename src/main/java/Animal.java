@@ -9,9 +9,8 @@ public class Animal {
     private String name;
     private int id;
 
-    public Animal(String name, int id){
+    public Animal(String name){
         this.name = name;
-        this.id = id;
     }
 
     public String getName(){
@@ -19,7 +18,7 @@ public class Animal {
     }
 
     public int getId(){
-        return this.id;
+        return id;
     }
 
     @Override
@@ -27,22 +26,29 @@ public class Animal {
         if (this == o) return true;
         if (!(o instanceof Animal)) return false;
         Animal animal = (Animal) o;
-        return getId() == animal.getId() &&
-                Objects.equals(getName(), animal.getName());
+        return Objects.equals(getName(), animal.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getId());
+        return Objects.hash(getName());
     }
 
     public void save(){
         try(Connection con = DB.sql2o.open()){
-            String sql = "INSERT INTO animals (id, name) VALUES (:id, :name)";
-            con.createQuery(sql)
-                    .addParameter("id", this.id)
+            String sql = "INSERT INTO animals (name) VALUES (:name)";
+            this.id = (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
-                    .executeUpdate();
+                    .executeUpdate()
+                    .getKey();
+        }
+    }
+
+    public static List<Animal> all(){
+        try(Connection con = DB.sql2o.open()){
+            String sql = "SELECT * FROM animals";
+            return con.createQuery(sql)
+                    .executeAndFetch(Animal.class);
         }
     }
 

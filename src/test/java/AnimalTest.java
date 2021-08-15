@@ -6,39 +6,52 @@ import static org.junit.Assert.assertTrue;
 
 public class AnimalTest {
     @Rule
-    DatabaseRule database = new DatabaseRule();
+    public DatabaseRule database = new DatabaseRule();
 
     @Test
     public void animals_instantiatesCorrectly_true(){
-        Animal lucky = new Animal("Lucky", 1);
+        Animal lucky = new Animal("Lucky");
         assertTrue(lucky instanceof Animal);
     }
 
     @Test
     public void getName_animalInstantiatesWithName_string() {
-        Animal lucky = new Animal("Lucky", 1);
+        Animal lucky = new Animal("Lucky");
         lucky.getName();
         assertEquals("Lucky", lucky.getName());
     }
 
     @Test
-    public void getId_animalInstantiatesWithId_int() {
-        Animal lucky = new Animal("Lucky", 1);
-        lucky.getId();
-        assertEquals(1, lucky.getId());
-    }
-
-    @Test
     public void equals_returnsTrueIfNameAndIdAreEqual() {
-        Animal lucky = new Animal("Lucky", 1);
-        Animal becky = new Animal("Lucky", 1);
+        Animal lucky = new Animal("Lucky");
+        Animal becky = new Animal("Lucky");
         assertTrue(lucky.equals(becky));
     }
 
     @Test
     public void save_insertsObjectIntoDatabase_Animal() {
-        Animal lucky = new Animal("Lucky", 1);
+        Animal lucky = new Animal("Lucky");
         lucky.save();
         assertTrue(Animal.all().get(0).equals(lucky));
     }
+
+    @Test
+    public void all_returnsAllInstancesOfAnimal_true(){
+        Animal lucky = new Animal("Lucky");
+        lucky.save();
+        Animal becky = new Animal("Becky");
+        becky.save();
+        assertTrue(Animal.all().get(0).equals(lucky));
+        assertTrue(Animal.all().get(1).equals(becky));
+    }
+
+    @Test
+    public void save_assignsIdToObject(){
+        Animal unsavedLucky = new Animal("Lucky");
+        unsavedLucky.save();
+        Animal savedLucky = Animal.all().get(0);
+        assertEquals(unsavedLucky.getId(), savedLucky.getId());
+    }
+
+
 }
