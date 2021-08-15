@@ -2,6 +2,7 @@ import org.sql2o.Connection;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 import java.util.Timer;
 
 public class Endangered {
@@ -42,5 +43,19 @@ public class Endangered {
 
     public int getAnimalId(){
         return animalId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Endangered)) return false;
+        Endangered that = (Endangered) o;
+        return getAnimalId() == that.getAnimalId() &&
+                Objects.equals(getName(), that.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getAnimalId());
     }
 }
