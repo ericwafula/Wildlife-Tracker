@@ -35,4 +35,5 @@ public class Animal {
     public int hashCode() {
         return Objects.hash(getName(), getId());
     }
+
 }
