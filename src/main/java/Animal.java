@@ -36,4 +36,14 @@ public class Animal {
         return Objects.hash(getName(), getId());
     }
 
+    public void save(){
+        try(Connection con = DB.sql2o.open()){
+            String sql = "INSERT INTO animals (id, name) VALUES (:id, :name)";
+            con.createQuery(sql)
+                    .addParameter("id", this.id)
+                    .addParameter("name", this.name)
+                    .executeUpdate();
+        }
+    }
+
 }
