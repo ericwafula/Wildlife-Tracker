@@ -23,4 +23,11 @@ public class AnimalTest {
         lucky.getId();
         assertEquals(1, lucky.getId());
     }
+
+    @Test
+    public void equals_returnsTrueIfNameAndIdAreEqual() {
+        Animal lucky = new Animal("Lucky", 1);
+        Animal becky = new Animal("Lucky", 1);
+        assertTrue(lucky.equals(becky));
+    }
 }
