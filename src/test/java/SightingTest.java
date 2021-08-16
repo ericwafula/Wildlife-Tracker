@@ -1,6 +1,10 @@
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.util.Date;
+
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
@@ -71,5 +75,14 @@ public class SightingTest {
         Sighting nairobi = new Sighting(becky.getId(), "Zone A", "Becky");
         nairobi.save();
         assertEquals(nairobi.getAnimalId(), becky.getId());
+    }
+
+    @Test
+    public void save_recordsTimeOfSightingInDataBase() {
+        Sighting testSighting = new Sighting(1, "Nairobi", "Becky");
+        testSighting.save();
+        Timestamp savedSighting = Sighting.find(testSighting.getId()).getLastSighting();
+        Timestamp rightNow = new Timestamp(new Date().getTime());
+        assertEquals(DateFormat.getDateTimeInstance().format(rightNow), DateFormat.getDateTimeInstance().format(savedSighting));
     }
 }

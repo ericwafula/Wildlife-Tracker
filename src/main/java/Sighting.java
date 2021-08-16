@@ -1,5 +1,7 @@
 import org.sql2o.Connection;
 
+import java.sql.Timestamp;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -8,6 +10,7 @@ public class Sighting {
     private int animalId;
     private String rangerName;
     private String location;
+    private Timestamp lastSighting;
 
     public Sighting(int animalId, String location, String rangerName) {
         this.animalId = animalId;
@@ -31,6 +34,10 @@ public class Sighting {
         return rangerName;
     }
 
+    public Timestamp getLastSighting() {
+        return lastSighting;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,7 +55,7 @@ public class Sighting {
 
     public void save() {
         try(Connection con = DB.sql2o.open()) {
-            String sql = "INSERT INTO sightings (animalid, location, rangername) VALUES (:animalId, :location, :rangerName)";
+            String sql = "INSERT INTO sightings (animalid, location, rangername, lastsighting) VALUES (:animalId, :location, :rangerName, now())";
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("animalId", this.animalId)
                     .addParameter("location", this.location)
