@@ -1,9 +1,7 @@
 import org.sql2o.Connection;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
-import java.util.Timer;
 
 public class Sighting {
     private int id;
@@ -65,6 +63,15 @@ public class Sighting {
             String sql = "SELECT * FROM sightings";
             return con.createQuery(sql)
                     .executeAndFetch(Sighting.class);
+        }
+    }
+
+    public static Sighting find(int id){
+        try(Connection con = DB.sql2o.open()){
+            String sql = "SELECT * FROM sightings WHERE id=:id";
+            return con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Sighting.class);
         }
     }
 }

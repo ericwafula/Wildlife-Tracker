@@ -52,4 +52,13 @@ public class SightingTest {
         assertEquals(true, Sighting.all().get(1).equals(secondAnimalSighting));
         assertEquals(true, Sighting.all().get(2).equals(thirdAnimalSighting));
     }
+
+    @Test
+    public void find_returnsSightingWithTheSameId() {
+        Sighting firstAnimalSighting = new Sighting(1, "Zone A", "Becky");
+        firstAnimalSighting.save();
+        Sighting secondAnimalSighting = new Sighting(2, "Zone B", "Becka");
+        secondAnimalSighting.save();
+        assertEquals(Sighting.find(secondAnimalSighting.getId()), secondAnimalSighting);
+    }
 }
