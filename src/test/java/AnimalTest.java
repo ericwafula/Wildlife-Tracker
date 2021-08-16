@@ -41,8 +41,11 @@ public class AnimalTest {
         lucky.save();
         Animal becky = new Animal("Becky");
         becky.save();
+        Animal bucky = new Animal("Bucky");
+        bucky.save();
         assertTrue(Animal.all().get(0).equals(lucky));
         assertTrue(Animal.all().get(1).equals(becky));
+        assertTrue(Animal.all().get(2).equals(bucky));
     }
 
     @Test
