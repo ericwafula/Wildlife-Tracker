@@ -1,6 +1,8 @@
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -60,5 +62,14 @@ public class SightingTest {
         Sighting secondAnimalSighting = new Sighting(2, "Zone B", "Becka");
         secondAnimalSighting.save();
         assertEquals(Sighting.find(secondAnimalSighting.getId()), secondAnimalSighting);
+    }
+
+    @Test
+    public void save_saveEndangeredIdIntoDatabase_true() {
+        Animal becky = new Animal("Becky");
+        becky.save();
+        Sighting nairobi = new Sighting(becky.getId(), "Zone A", "Becky");
+        nairobi.save();
+        assertEquals(nairobi.getAnimalId(), becky.getId());
     }
 }
