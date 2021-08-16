@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Timer;
 
-public class Endangered {
+public class Endangered implements DatabaseManagement {
     private String name;
     private int id;
     private String age;
@@ -58,6 +58,7 @@ public class Endangered {
         return id;
     }
 
+    @Override
     public void save(){
         try(Connection con = DB.sql2o.open()){
             String sql = "INSERT INTO animals (name) VALUES (:name)";
