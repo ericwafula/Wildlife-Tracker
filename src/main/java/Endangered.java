@@ -7,7 +7,6 @@ import java.util.Timer;
 
 public class Endangered {
     private String name;
-    private int animalId;
     private int id;
     private String age;
 
@@ -27,9 +26,8 @@ public class Endangered {
     public static final String AGE_YOUNG = "young";
     public static final String AGE_ADULT = "adult";
 
-    public Endangered(String name, int animalId) {
+    public Endangered(String name) {
         this.name = name;
-        this.animalId = animalId;
         this.healthy = HEALTH_HEALTHY;
         this.ill = HEALTH_ILL;
         this.okay = HEALTH_OKAY;
@@ -42,22 +40,18 @@ public class Endangered {
         return name;
     }
 
-    public int getAnimalId(){
-        return animalId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Endangered)) return false;
         Endangered that = (Endangered) o;
-        return getAnimalId() == that.getAnimalId() &&
+        return getId() == that.getId() &&
                 Objects.equals(getName(), that.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getAnimalId());
+        return Objects.hash(getName(), getId());
     }
 
     public int getId(){
@@ -66,10 +60,9 @@ public class Endangered {
 
     public void save(){
         try(Connection con = DB.sql2o.open()){
-            String sql = "INSERT INTO animals (name, animalId) VALUES (:name, :animalId)";
+            String sql = "INSERT INTO animals (name) VALUES (:name)";
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
-                    .addParameter("animalId", this.animalId)
                     .executeUpdate()
                     .getKey();
         }
@@ -80,6 +73,15 @@ public class Endangered {
             String sql = "SELECT * FROM animals";
             return con.createQuery(sql)
                     .executeAndFetch(Endangered.class);
+        }
+    }
+
+    public static Endangered find(int id){
+        try(Connection con = DB.sql2o.open()){
+            String sql = "SELECT * FROM animals WHERE id= :id";
+            return con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Endangered.class);
         }
     }
 

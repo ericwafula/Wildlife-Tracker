@@ -15,27 +15,30 @@ public class EndangeredTest {
 
     @Test
     public void endangered_instantiatesWithName_true(){
-        Endangered becky = new Endangered("Becky", 1);
+        Endangered becky = new Endangered("Becky");
         assertEquals("Becky", becky.getName());
     }
 
-    @Test
-    public void Endangered_instantiatesWithAnimalId(){
-        Endangered becky = new Endangered("Becky", 1);
-        assertEquals(1, becky.getAnimalId());
-    }
 
     @Test
     public void equals_returnsIfNameAndAnimalIdAreTheSame_true(){
-        Endangered becky = new Endangered("Becky", 1);
-        Endangered lucky = new Endangered("Becky", 1);
+        Endangered becky = new Endangered("Becky");
+        Endangered lucky = new Endangered("Becky");
         assertTrue(becky.equals(lucky));
     }
 
     @Test
     public void save_returnsTrueIfDescriptionsAreTheSame(){
-        Endangered becky = new Endangered("Becky", 1);
+        Endangered becky = new Endangered("Becky");
         becky.save();
         assertTrue(Endangered.all().get(0).equals(becky));
+    }
+
+    @Test
+    public void save_assignsIdToMonster(){
+        Endangered unsavedBecky = new Endangered("Becky");
+        unsavedBecky.save();
+        Endangered savedBecky = Endangered.find(unsavedBecky.getId());
+        assertEquals(savedBecky.getId(), unsavedBecky.getId());
     }
 }
