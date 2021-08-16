@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 import static org.junit.Assert.*;
@@ -40,5 +41,17 @@ public class EndangeredTest {
         unsavedBecky.save();
         Endangered savedBecky = Endangered.find(unsavedBecky.getId());
         assertEquals(savedBecky.getId(), unsavedBecky.getId());
+    }
+
+    @Test
+    public void getSightings_retrievesAllSightingsFromDatabase_sightingsList() {
+        Endangered lucky = new Endangered("Lucky");
+        lucky.save();
+        Sighting nairobi = new Sighting(lucky.getId(), "Nairobi", "Becky");
+        nairobi.save();
+        Sighting kisumu = new Sighting(lucky.getId(), "Kisumu", "Bucky");
+        kisumu.save();
+        Sighting[] sightings = {nairobi, kisumu};
+        assertTrue(lucky.getSightings().containsAll(Arrays.asList(sightings)));
     }
 }
