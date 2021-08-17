@@ -1,0 +1,28 @@
+#logo{
+    font-weight: bold;
+    color: #23353C;
+    font-size: 36px;
+}
+
+.button-section{
+    display: inline-flex;
+    justify-content: flex-end;
+}
+
+#add{
+    color: #23353C;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.btn-all-animals{
+    border: #23353C solid 2px;
+    color: #23353C;
+    height: 40px;
+    width: 150px;
+}
+
+.btn-all-animals:hover{
+    background-color: #23353C;
+    color: white;
+}
