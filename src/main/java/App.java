@@ -16,7 +16,13 @@ public class App {
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //success submission
+        //all animals
+        get("/animals", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "animals.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //post submission
         post("/animals/new", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             return new ModelAndView(model, "success.hbs");
