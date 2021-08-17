@@ -6,38 +6,45 @@ import java.util.Objects;
 import java.util.Timer;
 
 public class Endangered implements DatabaseManagement {
-    private String name;
     private int id;
+    private String name;
+    private String danger;
+    private String health;
     private String age;
+    private String location;
+    private String ranger;
 
-    private String healthy;
-    private String ill;
-    private String okay;
-
-    private String newBorn;
-    private String young;
-    private String adult;
-
-    public static final String HEALTH_HEALTHY = "healthy";
-    public static final String HEALTH_ILL = "ill";
-    public static final String HEALTH_OKAY = "okay";
-
-    public static final String AGE_NEWBORN = "newborn";
-    public static final String AGE_YOUNG = "young";
-    public static final String AGE_ADULT = "adult";
-
-    public Endangered(String name) {
+    public Endangered(String name, String danger, String health, String age, String location, String ranger) {
         this.name = name;
-        this.healthy = HEALTH_HEALTHY;
-        this.ill = HEALTH_ILL;
-        this.okay = HEALTH_OKAY;
-        this.newBorn = AGE_NEWBORN;
-        this.young = AGE_YOUNG;
-        this.adult = AGE_ADULT;
+        this.danger = danger;
+        this.health = health;
+        this.age = age;
+        this.location = location;
+        this.ranger = ranger;
     }
 
     public String getName(){
         return name;
+    }
+
+    public String getDanger() {
+        return danger;
+    }
+
+    public String getHealth() {
+        return health;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getRanger() {
+        return ranger;
     }
 
     @Override
@@ -61,9 +68,14 @@ public class Endangered implements DatabaseManagement {
     @Override
     public void save(){
         try(Connection con = DB.sql2o.open()){
-            String sql = "INSERT INTO animals (name) VALUES (:name)";
+            String sql = "INSERT INTO animals (name, danger, health, age, location, ranger) VALUES (:name, :danger, :health, :age, :location, :ranger)";
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
+                    .addParameter("danger", this.danger)
+                    .addParameter("health", this.health)
+                    .addParameter("age", this.age)
+                    .addParameter("location", this.location)
+                    .addParameter("ranger", this.ranger)
                     .executeUpdate()
                     .getKey();
         }

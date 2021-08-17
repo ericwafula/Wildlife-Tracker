@@ -42,6 +42,8 @@
     color: #23353C;
     font-size: 24px;
     font-weight: bold;
+    border-bottom: solid #23353C 2px;
+    padding-bottom: 20px;
 }
 
 #date{
@@ -56,4 +58,5 @@ li{
 
 #value{
     color: #7B94A4;
+    margin-left: 10px;
 }
