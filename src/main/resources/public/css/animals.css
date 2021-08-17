@@ -1,5 +1,5 @@
-#heading-success{
-    color: #23353C;
+#heading-animals{
+    color: #7B94A4;
     font-weight: bold;
     font-size: 48px;
     margin-bottom: 50px;
@@ -7,15 +7,17 @@
     margin-top: 100px;
 }
 
-.add-new{
+.add-new-success{
     background-color: white;
     border: #8CA1A4 solid 2px;
     color: #8CA1A4;
     font-size: 24px;
     font-weight: bold;
+    margin-top: 40px;
+    height: 55px;
 }
 
-.add-new:hover{
+.add-new-success:hover{
     color: white;
     background-color: #8CA1A4;
 }
@@ -32,4 +34,26 @@
 .buttons{
     display: inline-flex;
     gap: 20px;
+}
+
+#animals{
+    border-bottom: #23353C;
+    list-style: none;
+    color: #23353C;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#date{
+    font-size: 18px;
+    color: #7B94A4;
+}
+
+li{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#value{
+    color: #7B94A4;
 }
