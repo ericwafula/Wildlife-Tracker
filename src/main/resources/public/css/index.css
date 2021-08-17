@@ -27,7 +27,16 @@
     width: 100%;
     font-weight: bold;
     font-size: 36px;
-    height: 55px;
+    height: 70px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-submit:hover{
+    background-color: white;
+    border: solid #7B94A4 2px;
+    color: #7B94A4;
 }
 
 form{
@@ -45,4 +54,12 @@ select{
     height: 55px;
     margin-bottom: 40px;
     font-size: 24px;
+}
+
+#body-section{
+    margin: 0;
+}
+
+.img-hero{
+    margin-left: -15px;
 }

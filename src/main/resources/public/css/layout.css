@@ -55,5 +55,9 @@ a{
 }
 
 #content{
-    padding: 0;
+    margin: 0;
+}
+
+#parent-content{
+    margin: 0;
 }
