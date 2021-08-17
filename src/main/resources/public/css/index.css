@@ -1,0 +1,65 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.img-hero{
+    background-image: url(/images/elephant.png);
+    background-position: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#heading{
+    color: #7B94A4;
+    font-size: 48px;
+    font-weight: bold;
+    width: 450px;
+    line-height: 60px;
+    margin-left: 100px;
+    margin-bottom: 50px;
+}
+
+.btn-submit{
+    color: white;
+    background-color: #8CA1A4;
+    width: 100%;
+    font-weight: bold;
+    font-size: 36px;
+    height: 70px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-submit:hover{
+    background-color: white;
+    border: solid #7B94A4 2px;
+    color: #7B94A4;
+}
+
+form{
+    width: 50%;
+    margin-left: 100px;
+}
+
+input{
+    height: 55px;
+    margin-bottom: 40px;
+    font-size: 24px;
+}
+
+select{
+    height: 55px;
+    margin-bottom: 40px;
+    font-size: 24px;
+}
+
+#body-section{
+    margin: 0;
+}
+
+.img-hero{
+    margin-left: -25px;
+}
