@@ -1,4 +1,4 @@
-# Hero Squad
+# Wildlife Tracker
 #### An application that allows Rangers to track wildlife sightings.
 #### By **Eric Wafula**
 ## Description
